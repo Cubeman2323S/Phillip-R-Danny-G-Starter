@@ -15,18 +15,10 @@ var yDirection = 0
 # var projectile_scene = preload("res://scenes/projectile.tscn")
 
 func _physics_process(_delta):
-	# TODO: Get horizontal input (left/right keys)
-	# Input.get_axis checks two keys and gives us a number:
-	# - When LEFT is pressed: returns -1.0
-	# - When RIGHT is pressed: returns 1.0  
-	# - When NOTHING is pressed: returns 0.0
 	xDirection = Input.get_axis("ui_left", "ui_right")
-	
-	# TODO: Get vertical input (up/down keys)  
-	# Same idea, but for up and down movement
 	yDirection = Input.get_axis("ui_up", "ui_down")
-	
-
+	velocity.x = xSpeed * xDirection
+	velocity.y = ySpeed * yDirection
 	# TODO: Calculate X movement by multiplying direction × speed
 	# This gives us the actual pixels to move this frame
 	# If direction is 1 and speed is 300, we get 300 pixels right
