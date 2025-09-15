@@ -19,15 +19,16 @@ func _physics_process(_delta):
 	yDirection = Input.get_axis("ui_up", "ui_down")
 	velocity.x = xSpeed * xDirection
 	velocity.y = ySpeed * yDirection
-	# TODO: Calculate X movement by multiplying direction × speed
-	# This gives us the actual pixels to move this frame
-	# If direction is 1 and speed is 300, we get 300 pixels right
-	# If direction is -1 and speed is 300, we get -300 pixels (left)
-	
-	
-	# TODO: Calculate Y movement the same way
-	
-	
+
+	if xDirection == 1:
+		facing = "right"
+	elif xDirection == -1:
+		facing = "left"
+	elif yDirection == -1:
+		facing = "up"
+	elif yDirection == 1:
+		facing = "down"
+
 	# TODO: Set the player's velocity (how fast they're moving)
 	# Godot's CharacterBody2D uses a velocity system
 	
@@ -45,14 +46,23 @@ func _physics_process(_delta):
 	# TODO: Actually apply the movement
 	# This is a special Godot function that makes the movement happen
 	move_and_slide()
+	update_animation()
 
 # TODO: Create animation function (add this outside of _physics_process)
 func update_animation():
+	
+	
+		
+	if xDirection == 0 and yDirection == 0:
+		_animation_player.play("idle_" + facing)
+	else:
+		_animation_player.play("walk_" + facing)
+		
+	
 	# TODO: Set the animation based on the facing direction
 	# Use: _animation_player.play("idle_" + facing)
 	# This combines "idle_" with whatever direction we're facing
 	pass
-
 
 # TODO: Create health change function for interactions
 func change_health(amount):
