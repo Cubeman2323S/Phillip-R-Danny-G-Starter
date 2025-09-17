@@ -6,6 +6,9 @@ var xDirection = 0
 var facing = "down"
 var ySpeed = 300.0
 var yDirection = 0
+var coins = 0
+var health = 100
+var max_health = 100
 
 # TODO: Add health system variables
 # var health = ?
@@ -71,6 +74,14 @@ func change_health(amount):
 	# TODO: Print the new health value
 	# TODO: Check if health <= 0 for death (optional challenge)
 	print("Health changed by: ", amount)
+	health += amount
+	if health>max_health:
+		health = max_health
+	if health<1:
+		queue_free()
+	
+	
+	
 
 
 # TODO: Create shooting function
@@ -95,3 +106,6 @@ func shoot():
 	# print("Shot projectile facing: ", facing)
 	
 	pass
+func change_coins(amount:int):
+	coins += amount
+	print("you have " + str(coins), " coins")
