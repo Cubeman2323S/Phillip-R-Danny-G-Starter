@@ -7,8 +7,16 @@ var facing = "down"
 var ySpeed = 300.0
 var yDirection = 0
 var coins = 0
+<<<<<<< Updated upstream
 var health = 100
 var max_health = 100
+=======
+<<<<<<< HEAD
+=======
+var health = 100
+var max_health = 100
+>>>>>>> 4524b769df2c59c348d99515c4841a447eb50085
+>>>>>>> Stashed changes
 
 # TODO: Add health system variables
 # var health = ?
@@ -107,5 +115,15 @@ func shoot():
 	
 	pass
 func change_coins(amount:int):
+<<<<<<< Updated upstream
 	coins += amount
 	print("you have " + str(coins), " coins")
+=======
+<<<<<<< HEAD
+	coins+=amount
+	print("Coins: " + str(coins))
+=======
+	coins += amount
+	print("you have " + str(coins), " coins")
+>>>>>>> 4524b769df2c59c348d99515c4841a447eb50085
+>>>>>>> Stashed changes
