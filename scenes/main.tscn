@@ -10906,11 +10906,11 @@ position = Vector2(365, 42)
 [node name="Unlocked Chest" type="Area2D" parent="Items"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Items/Unlocked Chest"]
-position = Vector2(532.5, 335)
+position = Vector2(390, 405)
 shape = SubResource("RectangleShape2D_q21ot")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Items/Unlocked Chest/CollisionShape2D"]
-position = Vector2(1.5, 0)
+position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_krpk6")
 animation = &"unlocked"
 
