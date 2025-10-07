@@ -4,6 +4,7 @@ var direction
 var target
 var timerstart = 3
 var timer = timerstart
+
 func set_direction(target):
 	direction = position.direction_to(target)
 	pass
@@ -19,4 +20,4 @@ func _on_body_entered(body):
 func _process(delta: float):
 	timer -= delta
 	if timer < 0:
-		queue_free()
+		queue_free()  

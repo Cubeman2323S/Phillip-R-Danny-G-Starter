@@ -9,10 +9,13 @@ var ySpeed = 300.0
 var yDirection = 0
 var coins = 0
 @export var offset : Vector2 = Vector2(0, -25)
+@onready var melee_box : CollisionShape2D = $Area2D/CollisionShape2D
 
 # TODO: Add health system variables
 var maxHealth = 10
 var health = maxHealth
+var is_attacking = false
+var attack_timer = .6
 
 func _ready() -> void:
 	pass
@@ -38,15 +41,28 @@ func _physics_process(_delta):
 	# TODO: Update facing direction based on movement
 	if xDirection > 0:
 		facing = "right"
+		melee_box.position = Vector2(30,-10)
 	elif xDirection < 0:
 		facing = "left"
+		melee_box.position = Vector2(-30,-10)
 	elif yDirection < 0:
 		facing = "up"
+		melee_box.position = Vector2(0,-40)
 	elif yDirection > 0:
 		facing = "down"
+		melee_box.position = Vector2(0,20)
 	
 	if Input.is_action_just_pressed("ui_select"):
 		shoot()
+	if Input.is_action_just_pressed("ui_accept"):
+		is_attacking = true
+		print("attack")
+	if is_attacking:
+		attack_timer -= _delta
+		if attack_timer < 0:
+			print("attack_end")
+			is_attacking = false
+			attack_timer = .66
 	
 	# call the animation function
 	update_animation()
@@ -55,6 +71,8 @@ func _physics_process(_delta):
 	# This is a special Godot function that makes the movement happen
 	move_and_slide()
 
+		
+	
 # TODO: Create animation function (add this outside of _physics_process)
 func update_animation():
 	# TODO: Set the animation based on the facing direction
@@ -68,7 +86,9 @@ func update_animation():
 		pass
 		
 	
-
+func on_body_entered(body):
+	if body.is_in_group("enemy"):
+		change_health(-2)
 
 # TODO: Create health change function for interactions
 func change_health(_amount:int):
