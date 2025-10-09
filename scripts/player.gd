@@ -16,7 +16,8 @@ var maxHealth = 10
 var health = maxHealth
 var is_attacking = false
 var attack_timer = .6
-
+var current_enemy 
+var player_in_range=false
 func _ready() -> void:
 	pass
 
@@ -55,15 +56,18 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("ui_select"):
 		shoot()
 	if Input.is_action_just_pressed("ui_accept"):
-		is_attacking = true
-		print("attack")
+		if is_attacking == false:
+			is_attacking = true
+			print("attack")
 	if is_attacking:
 		attack_timer -= _delta
 		if attack_timer < 0:
 			print("attack_end")
 			is_attacking = false
 			attack_timer = .66
-	
+	if is_attacking and current_enemy != null:
+		print("should die")
+		current_enemy.queue_free()
 	# call the animation function
 	update_animation()
 	
@@ -121,3 +125,11 @@ func shoot():
 	get_tree().get_root().add_child(projectile_clone)
 
 	pass
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		current_enemy = body
+		print(current_enemy.name)
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		current_enemy = null
+		
