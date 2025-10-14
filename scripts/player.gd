@@ -80,7 +80,10 @@ func _physics_process(_delta):
 # TODO: Create animation function (add this outside of _physics_process)
 func update_animation():
 	# TODO: Set the animation based on the facing direction
-	if velocity.is_zero_approx():
+	if is_attacking:
+		_animation_player.play("attack_"+facing)
+	
+	elif velocity.is_zero_approx():
 		_animation_player.play("idle_" + facing)
 	# This combines "idle_" with whatever direction we're facing
 		pass
