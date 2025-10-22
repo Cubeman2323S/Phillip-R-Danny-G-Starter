@@ -3,10 +3,13 @@ extends Area2D
 var lever_on = false
 var player
 var in_range = false
+var Rng = RandomNumberGenerator.new()
+var levertypenum = 0
 @onready var range: Area2D = $Area2D
 
 func on_body_entered(body):
 	if body == "Player":
+		player = body.name
 		print("in_Range!")
 		in_range = true
 func on_body_exited(body):
@@ -30,6 +33,8 @@ func update_animation():
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
+		random_num_gen(body)
+		player = body.name
 		print("in_Range!")
 		in_range = true
 		pass # Replace with function body.
@@ -37,6 +42,20 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.name == "Player":
+		player = null
 		in_range = false
 		print("out of range):")
 	pass # Replace with function body.
+
+func random_num_gen(body):
+	levertypenum = Rng.randi_range(1,3)
+	print(levertypenum)
+	if levertypenum == 1:
+		body.change_coins(2)
+		pass #make into coins
+	elif levertypenum == 2:
+		body.change_health(-2)
+		pass #make into damage
+	elif levertypenum == 3:
+		body.lever_slowed_effect(-60)
+		pass #speed decrease

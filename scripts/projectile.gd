@@ -7,8 +7,6 @@ func _ready() -> void:
 
 func _physics_process(_delta):
 	position += direction * speed * _delta
-	
-	pass
 
 func set_direction(facing_direction):
 	if facing_direction == "up":
@@ -19,5 +17,3 @@ func set_direction(facing_direction):
 		direction = Vector2.LEFT
 	elif facing_direction == "right":
 		direction = Vector2.RIGHT
-	
-	pass
