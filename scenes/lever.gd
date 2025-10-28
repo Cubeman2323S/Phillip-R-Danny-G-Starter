@@ -51,4 +51,4 @@ func random_num_gen(body):
 	elif levertypenum == 2:
 		body.change_health(-2)
 	elif levertypenum == 3:
-		body.lever_slowed_effect(-60)
+		body.lever_slowed_effect(-30)
