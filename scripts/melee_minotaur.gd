@@ -5,8 +5,10 @@ var chase = false
 var melee = false
 var speed = 300
 var facing = "right"
+@onready var _animation_melee_minotaur: AnimatedSprite2D = $AnimatedSprite2D
+var projectile_original = preload("res://scenes/enemy_arrow.tscn")
 
-#Add arrow preload (NOT CLICKBAIT, FREE IPHONE 100 GIVEWAYWAY)
+#Add arrow preload
 
 func _process(delta: float) -> void:
 	if ranged:
@@ -25,7 +27,10 @@ func _ready() -> void:
 	pass
 
 func shoot():
-	pass
+	var projectile_clone = projectile_original.instantiate()
+	projectile_clone.global_position = position
+	projectile_clone.set_direction(player.position)
+	get_tree().get_root().add_child(projectile_clone)
 
 
 func _on_ranged_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
