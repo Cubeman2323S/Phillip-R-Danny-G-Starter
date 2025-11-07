@@ -2,7 +2,7 @@ extends Area2D
 var speed = 200
 var direction
 var target
-var timerstart = 3
+var timerstart = 8
 var timer = timerstart
 
 func set_direction(target):
@@ -19,7 +19,7 @@ func _on_body_entered(body):
 	pass
 func _process(delta: float):
 	if direction.x < 0:
-		scale.x *= -1
+		scale.x = -.5
 	timer -= delta
 	if timer < 0:
 		queue_free()
