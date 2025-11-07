@@ -5,15 +5,18 @@ var chase = false
 var melee = false
 var speed = 300
 var facing = "right"
+var maxtimer2 = .75
+var timer2 = maxtimer2
 @onready var _animation_melee_minotaur: AnimatedSprite2D = $AnimatedSprite2D
 var projectile_original = preload("res://scenes/enemy_arrow.tscn")
 
-#Add arrow preload
-
 func _process(delta: float) -> void:
+	timer2 -= delta
 	if ranged:
-		shoot()
-		_animation_melee_minotaur.play("crossbow_shoot_" + facing)
+		if timer2 < 0:
+			shoot()
+			timer2 = maxtimer2
+			_animation_melee_minotaur.play("crossbow_shoot_" + facing)
 	elif chase:
 		_animation_melee_minotaur.play("walk_" + facing)
 		pass
@@ -22,6 +25,7 @@ func _process(delta: float) -> void:
 		pass
 	else:
 		_animation_melee_minotaur.play("crossbow_idle_" + facing)
+	
 
 func _ready() -> void:
 	pass
@@ -36,38 +40,27 @@ func shoot():
 func _on_ranged_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.name == "Player":
 		ranged = true
-		pass
-
 
 func _on_ranged_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.name == "Player":
 		ranged = false
-		pass
-
 
 func _on_chase_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.name == "Player":
 		ranged = false
 		chase = true
-		pass
-
 
 func _on_chase_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.name == "Player":
 		ranged = true
 		chase = false
-		pass
-
 
 func _on_melee_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.name == "Player":
 		chase = false
 		melee = true
-		pass
-
 
 func _on_melee_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.name == "Player":
 		chase = true
 		melee = false
-		pass

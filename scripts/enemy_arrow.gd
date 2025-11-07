@@ -18,6 +18,8 @@ func _on_body_entered(body):
 		queue_free()
 	pass
 func _process(delta: float):
+	if direction.x < 0:
+		scale.x *= -1
 	timer -= delta
 	if timer < 0:
 		queue_free()
