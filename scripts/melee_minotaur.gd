@@ -12,8 +12,8 @@ var direction
 @onready var _animation_melee_minotaur: AnimatedSprite2D = $AnimatedSprite2D
 var projectile_original = preload("res://scenes/enemy_arrow.tscn")
 
-#func set_direction(target):
-	#direction = position.direction_to(target)
+func set_direction(target):
+	direction = position.direction_to(target)
 func _process(delta: float) -> void:
 	timer2 -= delta
 	if ranged:
@@ -26,11 +26,13 @@ func _process(delta: float) -> void:
 		position += direction * speed * delta
 		pass
 	elif melee:
-		_animation_melee_minotaur.play("attack_" + facing)
+		if timer2 < 0:
+			timer2 = maxtimer2
+			_animation_melee_minotaur.play("attack_" + facing)
 		pass
 	else:
 		_animation_melee_minotaur.play("crossbow_idle_" + facing)
-	#set_direction(target)
+	set_direction(target)
 
 func _ready() -> void:
 	pass
@@ -45,7 +47,7 @@ func shoot():
 func _on_ranged_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.name == "Player":
 		ranged = true
-		target = body
+		target = body.position
 
 func _on_ranged_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 
