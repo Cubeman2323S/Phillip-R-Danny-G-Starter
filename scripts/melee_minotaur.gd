@@ -12,8 +12,8 @@ var direction
 @onready var _animation_melee_minotaur: AnimatedSprite2D = $AnimatedSprite2D
 var projectile_original = preload("res://scenes/enemy_arrow.tscn")
 
-func set_direction(target):
-	direction = position.direction_to(target)
+#func set_direction(target):
+	#direction = position.direction_to(target)
 func _process(delta: float) -> void:
 	timer2 -= delta
 	if ranged:
@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 		pass
 	else:
 		_animation_melee_minotaur.play("crossbow_idle_" + facing)
-	set_direction(target)
+	#set_direction(target)
 
 func _ready() -> void:
 	pass
