@@ -52,13 +52,16 @@ func _process(delta: float) -> void:
 		if is_attacking:
 			attack_timer -= delta
 			_animation_melee_minotaur.play("attack_" + facing)
+		else: 
+			is_attacking = true
 		if attack_timer < 0:
+			player.change_health(-2)
 			print("attack_end")
 			is_attacking = false
 			attack_timer = .66
 		if is_attacking and current_enemy != null:
 			print("should die")
-			player.change_health(-2)
+			
 			pass
 		else:
 			_animation_melee_minotaur.play("crossbow_idle_" + facing)
