@@ -1010,7 +1010,7 @@ radius = 217.0023
 radius = 103.01942
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uk8e4"]
-radius = 49.010204
+radius = 36.013885
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vltjp"]
 
@@ -1019,7 +1019,7 @@ script = ExtResource("1_vltjp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xx5td")
-animation = &"idle_right"
+animation = &"walk_left"
 autoplay = "crossbow_shoot_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -1044,10 +1044,8 @@ position = Vector2(0, 9)
 shape = SubResource("CircleShape2D_adppo")
 
 [node name="Melee" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Melee"]
-visible = false
 position = Vector2(0, 9)
 shape = SubResource("CircleShape2D_uk8e4")
 
