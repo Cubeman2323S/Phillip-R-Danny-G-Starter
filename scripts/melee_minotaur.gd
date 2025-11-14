@@ -49,21 +49,19 @@ func _process(delta: float) -> void:
 		
 		pass
 	elif melee:
-		if timer2 < 0:
-			timer2 = maxtimer2
+		if is_attacking:
+			attack_timer -= delta
 			_animation_melee_minotaur.play("attack_" + facing)
-	if is_attacking:
-		attack_timer -= delta
-	if attack_timer < 0:
-		print("attack_end")
-		is_attacking = false
-		attack_timer = .66
-	if is_attacking and current_enemy != null:
-		print("should die")
-		current_enemy.change_health(-2)
-		pass
-	else:
-		_animation_melee_minotaur.play("crossbow_idle_" + facing)
+		if attack_timer < 0:
+			print("attack_end")
+			is_attacking = false
+			attack_timer = .66
+		if is_attacking and current_enemy != null:
+			print("should die")
+			player.change_health(-2)
+			pass
+		else:
+			_animation_melee_minotaur.play("crossbow_idle_" + facing)
 	#set_direction(target)
 
 func _ready() -> void:
